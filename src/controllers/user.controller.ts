@@ -132,14 +132,5 @@ export default class UserController {
     });
   };
 
-  public getReporterInfo = async (req: AuthenticatedRequest, res: Response, next: NextFunction)=>{
-    try {
-      const id = req.params.id;
-      const reporter = await this.service.getReporterInfo(id);
-      res.status(200).json(reporter);
-    } catch (error) {
-      next(error);
-    }
-  }
 
 }
