@@ -53,5 +53,5 @@ model User {
 }
 
 model Event {
-  
+  id                  String        @id @default(uuid())
 }
