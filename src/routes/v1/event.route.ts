@@ -13,3 +13,5 @@ router.post(
   '/',
   controller.createEvent
 );
+
+export default router
