@@ -23,7 +23,6 @@ enum AccountStatus {
   restricted
 }
 
-
 model User {
   id                  String        @id @default(uuid())
   firstName           String
@@ -37,7 +36,7 @@ model User {
   state               String?
   city                String?
   address             String?
-  profilePhoto        String?        @default("https://res.cloudinary.com/df6xz7bqp/image/upload/v1740443796/default_user_lppcww.jpg")
+  profilePhoto        String?       @default("https://res.cloudinary.com/df6xz7bqp/image/upload/v1740443796/default_user_lppcww.jpg")
   dateOfBirth         DateTime?
   accountStatus       AccountStatus @default(active)
   securityQuestionOne String?
@@ -53,5 +52,7 @@ model User {
 }
 
 model Event {
-  id                  String        @id @default(uuid())
+  id     String   @id @default(uuid())
+  title  String
+  
 }
