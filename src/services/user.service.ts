@@ -241,20 +241,6 @@ public async updateProfile(userId: string, dto: UpdateProfileDto) {
   }
 
 
-  public async getReporterInfo ( id: string ) {
-    return await this.utils.dbService.user.findUnique({
-      where: { id },
-      select: {
-        firstName: true,
-        lastName: true,
-        profilePhoto: true,
-        state: true,
-        city: true,
-        items: true,
-        createdAt: true,
-      }
-    })
-  }
 
 
 }
