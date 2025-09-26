@@ -52,4 +52,6 @@ model User {
   role                UserRole?     @default(User)
 }
 
-
+model Event {
+  
+}
