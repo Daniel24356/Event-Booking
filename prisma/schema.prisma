@@ -52,8 +52,9 @@ model User {
 }
 
 model Event {
-  id          String @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String
+  createdAt   DateTime   @default(now())
   
 }
