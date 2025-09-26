@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  Male
+  Female
+}
+
+enum UserRole {
+  User
+  Admin
+  SuperAdmin
+}
+
+enum AdminRole {
+  LawAgency
+  TechnicalSupport
+  CustomeCare
+}
+
+enum AccountStatus {
+  active
+  restricted
+}
+
+enum ItemStatus {
+  lost
+  stolen
+  safe
+}
+
+enum ItemState {
+  All
+  Processing
+  Investigating
+  Recovered
+}
+
+enum ItemType {
+  Mobilephone
+  Car
+  Laptop
+  OtherElectronics
+}
+
+model User {
+  id                  String        @id @default(uuid())
+  firstName           String
+  lastName            String
+  username            String
+  email               String
+  emailVerified       Boolean       @default(false)
+  phoneNumber         String?
+  phoneNumberVerified Boolean       @default(false)
+  password            String
+  state               String?
+  city                String?
+  address             String?
+  profilePhoto        String?        @default("https://res.cloudinary.com/df6xz7bqp/image/upload/v1740443796/default_user_lppcww.jpg")
+  dateOfBirth         DateTime?
+  accountStatus       AccountStatus @default(active)
+  securityQuestionOne String?
+  securityQuestionTwo String?
+  securityAnswerOne   String?
+  securityAnswerTwo   String?
+  identityVerified    Boolean       @default(false)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime?     @updatedAt
+  adminNote           String?
+  gender              Gender?
+  role                UserRole?     @default(User)
+  Admin               Admin[]
+  items               Item[]
+  Report              Report[]
+}
+
+model Item {
+  id                String      @id @default(uuid())
+  userId            String
+  name              String
+  description       String
+  serialNumber      String?
+  imeiNumber        String?
+  purchaseDate      DateTime
+  purchaseLocation  String
+  additionDetails   String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime?   @updatedAt
+  comment           String
+  itemType          ItemType
+  missingData       DateTime
+  missingLocation   String
+  purchaseCondition ItemStatus
+  reportedName      String?
+  review            String
+  seenDate          DateTime
+  seenLocation      String
+  shopName          String?
+  currentCondition  ItemStatus
+  status            ItemState   @default(Processing)
+  views             Int         @default(0)
+  user              User        @relation(fields: [userId], references: [id])
+  images            ItemImage[]
+  reports           Report[]
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  itemId      String
+  description String
+  createdAt   DateTime @default(now())
+  userid      String
+  item        Item     @relation(fields: [itemId], references: [id])
+  user        User     @relation(fields: [userid], references: [id])
+}
+
+model SeenItemReports {
+  id           String   @id @default(uuid())
+  itemId       String
+  seenDate     String
+  seenLocation String
+  comment      String
+  createdAt    DateTime @default(now())
+}
+
+model Admin {
+  id          String        @id @default(uuid())
+  userId      String
+  email       String
+  role        AdminRole?
+  status      AccountStatus
+  address     String
+  adminTitle  String
+  adminname   String
+  city        String
+  phoneNumber String
+  state       String
+  User        User          @relation(fields: [userId], references: [id])
+  Permissions Permissions[]
+}
+
+model Permissions {
+  id                     String                   @id
+  adminId                String
+  // adminPermission        AdminManagement?
+  // reportedItemPermission ReportedItemsManagement?
+  // userPermission         UserManagement?
+  Admin                  Admin                    @relation(fields: [adminId], references: [id])
+}
+
+
+model ItemImage {
+  id        String    @id @default(uuid())
+  url       String
+  itemId    String
+  type      String
+  item      Item      @relation(fields: [itemId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
