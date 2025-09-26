@@ -31,6 +31,7 @@ export default class BookingController {
             next(err)
         }
     }
+    
 
 
 }
