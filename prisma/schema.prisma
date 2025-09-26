@@ -61,6 +61,6 @@ model Event {
 }
 
 model Booking {
-  // id   String    @id @default(uuid())
+  id   String    @id @default(uuid())
   // userName String 
 }
