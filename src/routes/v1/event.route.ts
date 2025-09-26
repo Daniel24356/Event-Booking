@@ -3,3 +3,8 @@ import express from 'express';
 
 const router = express.Router();
 const controller = new EventController();
+
+router.get(
+  '/',
+  controller.getEvents
+);
