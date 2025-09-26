@@ -8,8 +8,7 @@ import redis from "../redis";
 import termii from "../utils/termii";
 import { compare, hash } from "bcryptjs";
 import { Gender } from "@prisma/client";
-import { Item } from "@prisma/client";
-import { AddItemDto } from "../dtos/item.dto";
+
 
 export default class UserService {
   private utils: UtilsService = new UtilsService()
@@ -242,20 +241,6 @@ public async updateProfile(userId: string, dto: UpdateProfileDto) {
   }
 
 
-  public async getReporterInfo ( id: string ) {
-    return await this.utils.dbService.user.findUnique({
-      where: { id },
-      select: {
-        firstName: true,
-        lastName: true,
-        profilePhoto: true,
-        state: true,
-        city: true,
-        items: true,
-        createdAt: true,
-      }
-    })
-  }
 
 
 }
