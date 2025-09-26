@@ -19,12 +19,13 @@ export default class EventController {
         }
     }
 
-    public createEvents = async (req: Request, res: Response, next: NextFunction) => {
+    public createEvent = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const event = await this.service.createEvent(req.body);
             res.status(StatusCodes.OK).json({
                 error: false,
-                message: event,
+                message: 'Event created successful',
+                data: event
             });
         } catch (err: any) {
             next(err)
