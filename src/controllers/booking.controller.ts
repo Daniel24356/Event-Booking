@@ -5,4 +5,5 @@ export default class BookingController {
 private readonly service: BookingService = new BookingService();  
 
 
+
 }
