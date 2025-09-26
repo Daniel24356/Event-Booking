@@ -8,8 +8,7 @@ import redis from "../redis";
 import termii from "../utils/termii";
 import { compare, hash } from "bcryptjs";
 import { Gender } from "@prisma/client";
-import { Item } from "@prisma/client";
-import { AddItemDto } from "../dtos/item.dto";
+
 
 export default class UserService {
   private utils: UtilsService = new UtilsService()
