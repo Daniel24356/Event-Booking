@@ -62,5 +62,6 @@ model Event {
 
 model Booking {
   id   String    @id @default(uuid())
-  userName String 
+  userName String
+  eventId  String 
 }
