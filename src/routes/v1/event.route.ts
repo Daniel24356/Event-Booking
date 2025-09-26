@@ -8,3 +8,8 @@ router.get(
   '/',
   controller.getEvents
 );
+
+router.post(
+  '/',
+  controller.createEvent
+);

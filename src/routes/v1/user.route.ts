@@ -62,12 +62,6 @@ router.get(
   controller.getUserById
 );
 
-router.get(
-  '/get-reporter/:id',
-  authMiddleware,
-  controller.getReporterInfo
-);
-
 
 
 export default router;
