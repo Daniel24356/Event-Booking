@@ -28,9 +28,10 @@ export default class BookingController {
     }
   };
 
-  public getBookings = async (req: Request, res: Response, next: NextFunction) => {
+  public getBookingsByUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-      const bookings = await this.service.getBookings();
+       const userId = req.session.user.id;
+      const bookings = await this.service.getBookingsByUser(userId);
       res.status(StatusCodes.OK).json({
         error: false,
         message: "Bookings fetched successfully",

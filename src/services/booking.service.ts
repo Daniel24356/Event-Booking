@@ -26,12 +26,16 @@ export default class BookingService {
     });
   }
 
-  public async getBookings() {
-    return await this.utils.dbService.booking.findMany({
-      include: {
-        event: true,
-        user: true, 
-      },
-    });
-  }
+ public async getBookingsByUser(userId: string) {
+  return await this.utils.dbService.booking.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      event: true,
+      user: true,
+    },
+  });
+}
+
 }
