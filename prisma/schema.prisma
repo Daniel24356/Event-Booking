@@ -65,7 +65,7 @@ model Event {
 
 model Booking {
   id   String    @id @default(uuid())
-  userName String
+  userId String
   eventId  String 
   event    Event   @relation(fields: [eventId], references: [id])
 }
