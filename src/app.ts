@@ -16,7 +16,7 @@ export default class App {
   public app: Application;
   public port: string | number;
   public database: typeof database;
-
+ 
   constructor() {
     this.app = express();
     this.port = config.app.port || 3001;
