@@ -10,3 +10,4 @@ router.get("/", authMiddleware, controller.getBookingsByUser);
 router.post("/", authMiddleware, controller.createBooking);
 
 export default router;
+
