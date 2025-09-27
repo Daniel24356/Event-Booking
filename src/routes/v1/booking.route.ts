@@ -1,18 +1,13 @@
-
-import express from 'express';
-import BookingController from '../../controllers/booking.controller';
+import express from "express";
+import BookingController from "../../controllers/booking.controller";
+import authMiddleware from "../../middlewares/auth.middleware";
 
 const router = express.Router();
 const controller = new BookingController();
 
-router.get(
-  '/',
-  controller.getBookings
-);
+router.get("/", authMiddleware, controller.getBookingsByUser);
 
-router.post(
-  '/',
-  controller.createBooking
-);
+router.post("/", authMiddleware, controller.createBooking);
 
-export default router
+export default router;
+
