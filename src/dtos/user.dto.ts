@@ -89,3 +89,4 @@ export class VerifyPhoneNumberDto extends RequestPhoneNumberVerificationDto {
   @IsNotEmpty()
   otp: string;
 }
+
