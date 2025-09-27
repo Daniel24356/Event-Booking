@@ -21,7 +21,7 @@ export default class BookingService {
     return await this.utils.dbService.booking.create({
       data: {
         eventId: data.eventId,
-        userId, 
+        userId,
       },
     });
   }

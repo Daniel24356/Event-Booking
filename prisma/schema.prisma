@@ -49,23 +49,26 @@ model User {
   adminNote           String?
   gender              Gender?
   role                UserRole?     @default(User)
+
+  Booking Booking[]
 }
 
 model Event {
-  id          String     @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
   description String
   location    String
   date        String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   Booking Booking[]
 }
 
 model Booking {
-  id   String    @id @default(uuid())
-  userId String
-  eventId  String 
-  event    Event   @relation(fields: [eventId], references: [id])
+  id      String @id @default(uuid())
+  userId  String
+  eventId String
+  event   Event  @relation(fields: [eventId], references: [id])
+  user    User   @relation(fields: [userId], references: [id])
 }

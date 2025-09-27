@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import BookingService from "../services/booking.service";
 import { StatusCodes } from "http-status-codes";
+import { AuthenticatedRequest } from "../interfaces";
 
 export default class BookingController {
   private readonly service: BookingService = new BookingService();
 
-  public createBooking = async (req: Request, res: Response, next: NextFunction) => {
+  public createBooking = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
-      const userId = (req as any).user?.id; // comes from auth middleware
+      const userId = req.session.user.id;
       if (!userId) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
           error: true,
