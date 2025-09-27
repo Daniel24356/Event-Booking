@@ -5,7 +5,7 @@ import authMiddleware from "../../middlewares/auth.middleware";
 const router = express.Router();
 const controller = new BookingController();
 
-router.get("/", controller.getBookings);
+router.get("/", authMiddleware, controller.getBookingsByUser);
 
 router.post("/", authMiddleware, controller.createBooking);
 
