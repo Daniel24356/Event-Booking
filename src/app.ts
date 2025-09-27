@@ -19,7 +19,7 @@ export default class App {
 
   constructor() {
     this.app = express();
-    this.port = config.app.port || 3000;
+    this.port = config.app.port || 3001;
     this.database = database;
     this.initializeMiddlewares();
     this.initializeRoutes();

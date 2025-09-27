@@ -53,26 +53,26 @@ export default class AuthService {
       }
     });
 
-    const code = config.app.isProduction ? _.random(10000, 99999).toString() : '12345';
-    await redis.setex(`verification:email:${user.email}`, 30 * 60, code);
+  //   const code = config.app.isProduction ? _.random(10000, 99999).toString() : '12345';
+  //   await redis.setex(`verification:email:${user.email}`, 30 * 60, code);
 
-    const greeting = user.firstName 
-  ? this.utils.capitalizeString(user.firstName)
-  : 'User';
+  //   const greeting = user.firstName 
+  // ? this.utils.capitalizeString(user.firstName)
+  // : 'User';
 
-  const info =  await this.utils.emailService.sendEmail(
-      user.email,
-      'Verify your email',
-      `<p>Hello, ${greeting}</p>
-      <p>Here's your one time pin <h3>${code}</h3> </p>
-      <p><strong>Note: </strong>This pin is only valid for <strong>30 minutes</strong></p>`
-    );
+  // const info =  await this.utils.emailService.sendEmail(
+  //     user.email,
+  //     'Verify your email',
+  //     `<p>Hello, ${greeting}</p>
+  //     <p>Here's your one time pin <h3>${code}</h3> </p>
+  //     <p><strong>Note: </strong>This pin is only valid for <strong>30 minutes</strong></p>`
+  //   );
 
-    const template = <OtpEmail otp={code} />;
-    const response: EmailResponse = await emailService2.sendEmail(user.email, "Verify your email", template);
-    if(!response.success){
-      throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, response.error || "Failed to send otp");
-    }
+  //   const template = <OtpEmail otp={code} />;
+  //   const response: EmailResponse = await emailService2.sendEmail(user.email, "Verify your email", template);
+  //   if(!response.success){
+  //     throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, response.error || "Failed to send otp");
+  //   }
 
     return {
       ..._.omit(user,
@@ -107,35 +107,35 @@ export default class AuthService {
       );
     }
 
-    if (!user.emailVerified) {
-      const code = config.app.isProduction ? _.random(10000, 99999).toString() : '12345';
-      await redis.setex(`verification:email:${user.email}`, 30 * 60, code);
+  //   if (!user.emailVerified) {
+  //     const code = config.app.isProduction ? _.random(10000, 99999).toString() : '12345';
+  //     await redis.setex(`verification:email:${user.email}`, 30 * 60, code);
       
-        const greeting = user.firstName 
-  ? this.utils.capitalizeString(user.firstName)
-  : 'User';
+  //       const greeting = user.firstName 
+  // ? this.utils.capitalizeString(user.firstName)
+  // : 'User';
 
-      await this.utils.emailService.sendEmail(
-        user.email,
-        'Verify your email',
-        `<p>Hello, ${greeting}}</p>
-        <p>Here's your one time pin <h3>${code}</h3> </p>
-        <p><strong>Note: </strong>This pin is only valid for <strong>30 minutes</strong></p>`
-      );
+  //     await this.utils.emailService.sendEmail(
+  //       user.email,
+  //       'Verify your email',
+  //       `<p>Hello, ${greeting}}</p>
+  //       <p>Here's your one time pin <h3>${code}</h3> </p>
+  //       <p><strong>Note: </strong>This pin is only valid for <strong>30 minutes</strong></p>`
+  //     );
 
-      const template = <OtpEmail otp={code} />;
-      const response: EmailResponse = await emailService2.sendEmail(user.email, "Verify your email", template);
-      if(!response.success){
-        throw new HttpException(
-          StatusCodes.INTERNAL_SERVER_ERROR, 
-          "Email not verified, Failed to send verification email, Please try again later"
-        );
-      }
-      throw new HttpException(
-        StatusCodes.BAD_REQUEST,
-        'Email not verified, Please check your inbox for the verification email'
-      );
-    }
+  //     const template = <OtpEmail otp={code} />;
+  //     const response: EmailResponse = await emailService2.sendEmail(user.email, "Verify your email", template);
+  //     if(!response.success){
+  //       throw new HttpException(
+  //         StatusCodes.INTERNAL_SERVER_ERROR, 
+  //         "Email not verified, Failed to send verification email, Please try again later"
+  //       );
+  //     }
+  //     throw new HttpException(
+  //       StatusCodes.BAD_REQUEST,
+  //       'Email not verified, Please check your inbox for the verification email'
+  //     );
+  //   }
 
     if (!user.password) {
   throw new Error('Password is missing');
